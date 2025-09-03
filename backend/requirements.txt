@@ -1,0 +1,55 @@
+# RAG Tool Standalone - Backend Dependencies
+# CRITICAL: Preserves exact versions that work with the original system
+
+# Core FastAPI and server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# WebSocket support
+websockets==12.0
+
+# Database and Vector Operations
+supabase==2.0.0
+pgvector==0.2.4
+asyncpg==0.29.0
+
+# OpenAI for embeddings (CRITICAL - must preserve exact model compatibility)
+openai==1.3.7
+
+# Google Drive Integration (Service Account)
+google-api-python-client==2.108.0
+google-auth==2.23.4
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+
+# Text Processing (PRESERVE EXACT FILE FORMAT SUPPORT)
+pypdf==3.17.1
+python-docx==1.1.0
+python-pptx==0.6.23
+xlrd==2.0.1
+openpyxl==3.1.2
+olefile==0.46
+
+# Enhanced text processing with hyperlink preservation
+mammoth==1.6.0
+markdownify==0.11.6
+pdfplumber==0.10.3
+
+# Data processing and utilities
+pydantic==2.5.0
+python-dotenv==1.0.0
+requests==2.31.0
+
+# Async support
+asyncio==3.4.3
+aiofiles==23.2.1
+
+# Development and testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
+
+# Optional: Enhanced logging and monitoring
+structlog==23.2.0
+rich==13.7.0
