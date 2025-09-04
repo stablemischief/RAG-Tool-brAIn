@@ -15,8 +15,8 @@ NC='\033[0m' # No Color
 
 # Configuration
 INSTALL_DIR="rag-tool-standalone"
-REPO_URL="https://raw.githubusercontent.com/your-org/RAG-Tool/main"
-GITHUB_REPO="https://api.github.com/repos/your-org/RAG-Tool/contents"
+REPO_URL="https://raw.githubusercontent.com/stablemischief/RAG-Tool-brAIn/main"
+GITHUB_REPO="https://api.github.com/repos/stablemischief/RAG-Tool-brAIn/contents"
 
 # Logging functions
 log_info() {
