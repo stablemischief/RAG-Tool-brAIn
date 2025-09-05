@@ -29,7 +29,7 @@ Before starting, ensure you have:
 
 ```bash
 # Single command installation 
-curl -fsSL https://raw.githubusercontent.com/your-org/RAG-Tool/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/stablemischief/RAG-Tool-brAIn/main/install.sh | bash
 
 # Enter the installation directory
 cd rag-tool-standalone
@@ -339,7 +339,7 @@ If you want to modify the RAG Tool source code:
 
 ```bash
 # Clone the full repository
-git clone https://github.com/your-org/RAG-Tool.git
+git clone https://github.com/stablemischief/RAG-Tool-brAIn.git
 cd RAG-Tool
 
 # Use development docker-compose (builds from source)
@@ -370,9 +370,9 @@ docker push ragool/rag-tool-frontend:latest
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/RAG-Tool/issues)
+- **Issues**: [GitHub Issues](https://github.com/stablemischief/RAG-Tool-brAIn/issues)
 - **Documentation**: This README + inline help in setup wizard
-- **Community**: [GitHub Discussions](https://github.com/your-org/RAG-Tool/discussions)
+- **Community**: [GitHub Discussions](https://github.com/stablemischief/RAG-Tool-brAIn/discussions)
 
 ## 🎉 Success!
 
