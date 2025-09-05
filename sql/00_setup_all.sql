@@ -102,17 +102,17 @@ $$;
 -- Document rows table for spreadsheet data
 CREATE TABLE IF NOT EXISTS document_rows (
     id BIGSERIAL PRIMARY KEY,
-    file_id TEXT NOT NULL,
+    dataset_id TEXT NOT NULL,
     row_number INTEGER NOT NULL,
-    data JSONB NOT NULL,
+    row_data JSONB NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    UNIQUE(file_id, row_number)
+    UNIQUE(dataset_id, row_number)
 );
 
--- Index for file_id lookups
-CREATE INDEX IF NOT EXISTS document_rows_file_id_idx 
-ON document_rows (file_id);
+-- Index for dataset_id lookups
+CREATE INDEX IF NOT EXISTS document_rows_dataset_id_idx 
+ON document_rows (dataset_id);
 
 -- Document metadata table for file tracking
 CREATE TABLE IF NOT EXISTS document_metadata (
