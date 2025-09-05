@@ -1,6 +1,21 @@
 -- RAG Tool Standalone - Document Metadata Tables
 -- Additional tables for document management and processing tracking
 
+-- Document rows table for spreadsheet data
+CREATE TABLE IF NOT EXISTS document_rows (
+    id BIGSERIAL PRIMARY KEY,
+    file_id TEXT NOT NULL,
+    row_number INTEGER NOT NULL,
+    data JSONB NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    UNIQUE(file_id, row_number)
+);
+
+-- Index for file_id lookups
+CREATE INDEX IF NOT EXISTS document_rows_file_id_idx 
+ON document_rows (file_id);
+
 -- Document metadata table for file tracking
 CREATE TABLE IF NOT EXISTS document_metadata (
     id TEXT PRIMARY KEY,
@@ -59,6 +74,12 @@ CREATE TRIGGER document_metadata_updated_at_trigger
     EXECUTE FUNCTION update_document_metadata_updated_at();
 
 -- Display setup status
+SELECT 
+    'document_rows' as table_name,
+    COUNT(*) as row_count,
+    pg_size_pretty(pg_total_relation_size('document_rows')) as table_size
+FROM document_rows
+UNION ALL
 SELECT 
     'document_metadata' as table_name,
     COUNT(*) as row_count,
