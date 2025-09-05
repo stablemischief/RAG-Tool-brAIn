@@ -38,9 +38,9 @@ CREATE INDEX IF NOT EXISTS documents_embedding_idx
 ON documents USING ivfflat (embedding vector_cosine_ops) 
 WITH (lists = 100);
 
--- Index for metadata queries (file_id lookups)
+-- Index for metadata queries (file_id lookups)  
 CREATE INDEX IF NOT EXISTS documents_metadata_file_id_idx 
-ON documents USING gin ((metadata->>'file_id'));
+ON documents USING gin (metadata);
 
 -- Index for content search (if needed)
 CREATE INDEX IF NOT EXISTS documents_content_idx 
