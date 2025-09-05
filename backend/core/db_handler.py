@@ -187,6 +187,37 @@ class DatabaseHandler:
             print(f"Error inserting/updating document metadata: {e}")
             return False
     
+    def insert_document_rows(self, file_id: str, rows: List[Dict[str, Any]]) -> bool:
+        """
+        Insert rows from a tabular file into the document_rows table.
+        Port from original source - preserves exact logic.
+        
+        Args:
+            file_id: The file ID (references document_metadata.id)
+            rows: List of row data as dictionaries
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # First, delete any existing rows for this file
+            self.supabase.table("document_rows").delete().eq("dataset_id", file_id).execute()
+            print(f"Deleted existing rows for file ID: {file_id}")
+            
+            # Insert new rows
+            for row in rows:
+                self.supabase.table("document_rows").insert({
+                    "dataset_id": file_id,
+                    "row_data": row
+                }).execute()
+            print(f"Inserted {len(rows)} rows for file ID: {file_id}")
+            
+            return True
+            
+        except Exception as e:
+            print(f"Error inserting document rows: {e}")
+            return False
+    
     # CRITICAL: Preserve the exact process_file_for_rag function logic
     def process_file_for_rag(self, file_content: bytes, text: str, file_id: str, 
                            file_url: str, file_title: str, mime_type: str = None, 
@@ -384,6 +415,12 @@ class AsyncDatabaseHandler:
         """Async version of search_documents_by_similarity."""
         return await asyncio.get_event_loop().run_in_executor(
             None, self.db.search_documents_by_similarity, query_embedding, match_count, filter_metadata
+        )
+    
+    async def insert_document_rows(self, file_id: str, rows: List[Dict[str, Any]]) -> bool:
+        """Async version of insert_document_rows."""
+        return await asyncio.get_event_loop().run_in_executor(
+            None, self.db.insert_document_rows, file_id, rows
         )
 
 # Global instance for easy access
