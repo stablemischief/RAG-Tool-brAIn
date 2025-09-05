@@ -99,6 +99,21 @@ $$;
 -- Step 4: Create Metadata Tables
 -- ================================================
 
+-- Document rows table for spreadsheet data
+CREATE TABLE IF NOT EXISTS document_rows (
+    id BIGSERIAL PRIMARY KEY,
+    file_id TEXT NOT NULL,
+    row_number INTEGER NOT NULL,
+    data JSONB NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    UNIQUE(file_id, row_number)
+);
+
+-- Index for file_id lookups
+CREATE INDEX IF NOT EXISTS document_rows_file_id_idx 
+ON document_rows (file_id);
+
 -- Document metadata table for file tracking
 CREATE TABLE IF NOT EXISTS document_metadata (
     id TEXT PRIMARY KEY,
@@ -330,7 +345,7 @@ SELECT
     tableowner
 FROM pg_tables 
 WHERE schemaname = 'public'
-AND tablename IN ('documents', 'document_metadata', 'processing_logs')
+AND tablename IN ('documents', 'document_rows', 'document_metadata', 'processing_logs')
 ORDER BY tablename;
 
 -- Show enabled extensions
@@ -353,6 +368,12 @@ SELECT
     COUNT(*) as row_count,
     pg_size_pretty(pg_total_relation_size('documents')) as table_size
 FROM documents
+UNION ALL
+SELECT 
+    'document_rows' as table_name,
+    COUNT(*) as row_count,
+    pg_size_pretty(pg_total_relation_size('document_rows')) as table_size
+FROM document_rows
 UNION ALL
 SELECT 
     'document_metadata' as table_name,
