@@ -28,7 +28,7 @@ Before starting, ensure you have:
 ### Installation
 
 ```bash
-# Single command installation
+# Single command installation 
 curl -fsSL https://raw.githubusercontent.com/your-org/RAG-Tool/main/install.sh | bash
 
 # Enter the installation directory
