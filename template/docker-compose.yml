@@ -6,7 +6,9 @@ version: '3.8'
 services:
   # Backend FastAPI service
   backend:
-    image: ragool/rag-tool-backend:latest  # Pre-built image for users
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: rag-tool-backend
     restart: unless-stopped
     ports:
@@ -57,7 +59,9 @@ services:
 
   # Frontend Next.js service  
   frontend:
-    image: ragool/rag-tool-frontend:latest  # Pre-built image for users
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: rag-tool-frontend
     restart: unless-stopped
     ports:

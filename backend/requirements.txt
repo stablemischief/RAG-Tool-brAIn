@@ -48,7 +48,7 @@ aiofiles==23.2.1
 # Development and testing
 pytest==7.4.3
 pytest-asyncio==0.21.1
-httpx==0.25.2
+httpx==0.24.1
 
 # Optional: Enhanced logging and monitoring
 structlog==23.2.0
