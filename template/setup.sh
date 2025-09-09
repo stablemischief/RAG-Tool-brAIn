@@ -295,9 +295,26 @@ prompt_google_drive_config() {
         fi
         
         log_warning "Service account JSON file not found at $SERVICE_ACCOUNT_FILE"
-        echo "Please:"
-        echo "1. Download your service account JSON file from Google Cloud Console"
-        echo "2. Place it at: $SERVICE_ACCOUNT_FILE"
+        echo "Please follow these steps:"
+        echo
+        echo "🔑 Create Service Account (NOT OAuth2):"
+        echo "1. Go to Google Cloud Console → APIs & Services → Credentials"
+        echo "2. Click '+ Create Credentials' → 'Service Account' (NOT OAuth 2.0 Client ID)"
+        echo "3. Name: 'rag-tool-service-account'"
+        echo "4. Skip role assignment → Skip user access → Done"
+        echo
+        echo "🔐 Download JSON Key:"
+        echo "1. Click your service account name → Keys tab"
+        echo "2. Add Key → Create new key → JSON format → Create"
+        echo "3. JSON file downloads automatically"
+        echo
+        echo "📁 Place JSON file:"
+        echo "4. Copy downloaded JSON file to: $SERVICE_ACCOUNT_FILE"
+        echo
+        echo "📧 Share Drive Folder:"
+        echo "5. Open JSON file and copy the 'client_email' value"
+        echo "6. Share your Google Drive folder with this email (Viewer permission)"
+        echo "   (It's a robot account - this is normal!)"
         echo
         read -p "Press Enter when file is in place... " -r
     done

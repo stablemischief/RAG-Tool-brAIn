@@ -73,15 +73,19 @@ After setup completes:
 
 ### Step 3: Create Service Account
 
+**⚠️ Important:** Choose **"Service Account"** (NOT OAuth2 Client ID). Service accounts work headlessly without browser interaction - perfect for VPS deployment!
+
 1. **Go to APIs & Services** → **"Credentials"**
-2. **Click "+ Create Credentials"** → **"Service Account"**
+2. **Click "+ Create Credentials"** → **"Service Account"** ⚠️ (NOT "OAuth 2.0 Client ID")
 3. **Service Account Details**:
    - **Name**: `rag-tool-service-account`
    - **Service account ID**: Auto-generated (or customize)
    - **Description**: `Service account for RAG Tool Drive access`
 4. **Click "Create and Continue"**
-5. **Skip role assignment** (click "Continue")
+5. **Skip role assignment** (click "Continue") - no special roles needed
 6. **Skip user access** (click "Done")
+
+**✅ No redirect URIs, authorized domains, or OAuth consent screen needed!**
 
 ### Step 4: Create Service Account Key
 
@@ -92,6 +96,18 @@ After setup completes:
 5. **Click "Create"**
 6. **JSON file downloads automatically** - save it securely!
 
+**📋 The JSON file contains everything needed:**
+```json
+{
+  "type": "service_account",
+  "project_id": "your-project-id",
+  "client_email": "rag-tool-service-account@your-project.iam.gserviceaccount.com",
+  "private_key": "-----BEGIN PRIVATE KEY-----\n...",
+  ...
+}
+```
+**📌 You'll need the `client_email` value for sharing your Drive folder!**
+
 ### Step 5: Share Your Drive Folder
 
 **For Personal Drive Folders:**
@@ -100,10 +116,11 @@ After setup completes:
 2. **Navigate to your target folder** (or create one)
 3. **Right-click the folder** → **"Share"**
 4. **Add the service account email**:
-   - Find email in your downloaded JSON file: `"client_email": "rag-tool-service-account@your-project.iam.gserviceaccount.com"`
-   - **Paste this email** in the share dialog
+   - **Open your downloaded JSON file** and find: `"client_email": "rag-tool-service-account@your-project.iam.gserviceaccount.com"`
+   - **Copy and paste this email** in the share dialog
    - **Set permission to "Viewer"** (sufficient for reading)
-5. **Click "Send"** - no notification needed
+   - **⚠️ This is a robot account, not a real person** - it's normal that it looks like a service email
+5. **Click "Send"** - no notification needed (the service account won't receive emails)
 6. **Copy the folder URL** and extract the folder ID:
    - URL: `https://drive.google.com/drive/folders/1AbCdEfGhIjKlMnOpQrStUvWxYz`
    - **Folder ID**: `1AbCdEfGhIjKlMnOpQrStUvWxYz` (the part after `/folders/`)
